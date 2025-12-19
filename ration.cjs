@@ -8,13 +8,16 @@ const https = require("https");
 const app = express();
 const PORT = process.env.PORT || 5678;
 
-/* ===== CONFIG ===== */
+/* ================= CONFIG ================= */
+const API_KEY = "C-SINT"; // 🔑 query api key (?key=DxD)
+
 const ENCRYPTION_KEY = "nic@impds#dedup05613";
 const GEMINI_API_KEY = "AIzaSyA6mmQbiqGqt3KcYRx2bPJ4k0C0Cg5NU7c";
 const IMPDS_PASSWORD = "CHCAEsoK";
 const USERNAME = "dsojpnagar@gmail.com";
+
 const BASE_URL = "https://impds.nic.in/impdsdeduplication";
-/* ================== */
+/* ========================================== */
 
 // Gemini
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
@@ -38,7 +41,7 @@ const axiosInstance = axios.create({
   }
 });
 
-/* ===== HELPERS ===== */
+/* ================= HELPERS ================= */
 function encryptAadhaar(text) {
   return CryptoJS.AES.encrypt(text, ENCRYPTION_KEY).toString();
 }
@@ -46,7 +49,22 @@ function encryptAadhaar(text) {
 function sha512(text) {
   return CryptoJS.SHA512(text).toString(CryptoJS.enc.Hex);
 }
-/* ================== */
+/* =========================================== */
+
+/* ============== API KEY CHECK ============== */
+app.use((req, res, next) => {
+  const key = req.query.key;
+
+  if (!key || key !== API_KEY) {
+    return res.status(401).json({
+      success: false,
+      error: "Invalid or missing API key"
+    });
+  }
+
+  next();
+});
+/* =========================================== */
 
 async function performLogin(retry = 0) {
   const maxRetries = 5;
@@ -128,11 +146,10 @@ async function ensureSession() {
   }
 }
 
-/* ===== SINGLE NORMAL API ===== */
+/* ============== MAIN API =================== */
 app.get("/", async (req, res) => {
   const { aadhaar, ration } = req.query;
 
-  // 🔹 IMPORTANT: empty request pe heavy kaam nahi
   if (!aadhaar && !ration) {
     return res.json({
       success: false,
@@ -180,7 +197,11 @@ app.get("/", async (req, res) => {
       }
     });
 
-    res.json({ success: true, count: data.length, data });
+    res.json({
+      success: true,
+      count: data.length,
+      data
+    });
 
   } catch (err) {
     res.status(500).json({
@@ -189,7 +210,7 @@ app.get("/", async (req, res) => {
     });
   }
 });
-/* ========================== */
+/* =========================================== */
 
 app.listen(PORT, () => {
   console.log("Server running on port", PORT);
