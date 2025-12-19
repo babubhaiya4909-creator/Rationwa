@@ -9,7 +9,8 @@ const app = express();
 const PORT = process.env.PORT || 5678;
 
 /* ================= CONFIG ================= */
-const API_KEY = "C-SINT"; // 🔑 query api key (?key=DxD)
+const API_KEY = "C-SINT"; // ?key=DxD
+const DEVELOPER = "@ROLEX_SIRR009";
 
 const ENCRYPTION_KEY = "nic@impds#dedup05613";
 const GEMINI_API_KEY = "AIzaSyA6mmQbiqGqt3KcYRx2bPJ4k0C0Cg5NU7c";
@@ -58,7 +59,8 @@ app.use((req, res, next) => {
   if (!key || key !== API_KEY) {
     return res.status(401).json({
       success: false,
-      error: "Invalid or missing API key"
+      error: "Invalid or missing API key",
+      developer: DEVELOPER
     });
   }
 
@@ -153,7 +155,8 @@ app.get("/", async (req, res) => {
   if (!aadhaar && !ration) {
     return res.json({
       success: false,
-      message: "API running. Use ?aadhaar= or ?ration="
+      message: "API running. Use ?aadhaar= or ?ration=",
+      developer: DEVELOPER
     });
   }
 
@@ -200,13 +203,15 @@ app.get("/", async (req, res) => {
     res.json({
       success: true,
       count: data.length,
+      developer: DEVELOPER,
       data
     });
 
   } catch (err) {
     res.status(500).json({
       success: false,
-      error: "Request failed"
+      error: "Request failed",
+      developer: DEVELOPER
     });
   }
 });
