@@ -1,10 +1,14 @@
 {
-  "name": "rationwa",
+  "name": "rationwa-api",
   "version": "1.0.0",
+  "description": "Ration & Aadhaar API with query API key",
   "main": "main.cjs",
   "type": "commonjs",
   "scripts": {
     "start": "node main.cjs"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "dependencies": {
     "express": "^4.18.2",
