@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 5678;
 
 /* ================= CONFIG ================= */
-const API_KEY = "C-SINT"; // ?key=DxD
+const API_KEY = "DxD"; // ?key=DxD
 const DEVELOPER = "@ROLEX_SIRR009";
 
 const ENCRYPTION_KEY = "nic@impds#dedup05613";
