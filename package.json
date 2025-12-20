@@ -1,7 +1,7 @@
 {
-  "name": "clean-info-api",
+  "name": "aadhaar-clean-api",
   "version": "1.0.0",
-  "description": "Clean API with API key, developer tag and no-info handling",
+  "description": "Aadhaar/Ration search API with cleaned response",
   "main": "main.cjs",
   "type": "commonjs",
   "scripts": {
@@ -13,6 +13,8 @@
   "dependencies": {
     "express": "^4.18.2",
     "axios": "^1.6.8",
-    "cheerio": "^1.0.0-rc.12"
+    "cheerio": "^1.0.0-rc.12",
+    "crypto-js": "^4.2.0",
+    "@google/generative-ai": "^0.7.1"
   }
 }
