@@ -8,11 +8,10 @@ const PORT = process.env.PORT || 5678;
 
 /* ========= CONFIG ========= */
 const API_KEY = "C-SINT";
-const DEVELOPER = "@C-SINT";
+const DEVELOPER = "@CSINTOFFLICIAL";
 const BASE_URL = "https://impds.nic.in/impdsdeduplication";
 /* ========================== */
 
-// Axios instance
 const client = axios.create({
   timeout: 60000,
   httpsAgent: new https.Agent({
@@ -31,13 +30,13 @@ app.use((req, res, next) => {
   if (req.query.key !== API_KEY) {
     return res.status(401).json({
       success: false,
-      error: "Invalid or missing API key",
+      message: "Invalid or missing API key",
       developer: DEVELOPER
     });
   }
   next();
 });
-/* ================================= */
+/* ================================ */
 
 /* ========= MAIN API ========= */
 app.get("/", async (req, res) => {
@@ -46,19 +45,19 @@ app.get("/", async (req, res) => {
   if (!ration) {
     return res.json({
       success: false,
-      message: "Use ?ration=XXXXXXXX",
+      message: "Use ?key=C-SINT&ration=XXXX",
       developer: DEVELOPER
     });
   }
 
   try {
-    // ⚠️ DEMO HTML FETCH (replace with real response if needed)
+    // 🔹 MAIN SOURCE REQUEST
     const response = await client.get(`${BASE_URL}/search`);
-
     const $ = cheerio.load(response.data);
+
     const data = [];
 
-    // ✅ ONLY REQUIRED FIELDS
+    // 🔹 DIRECT CLEANING (NO RAW STORAGE)
     $("table.table-striped tbody tr").each((_, row) => {
       const td = $(row).find("td");
       if (td.length >= 7) {
@@ -70,6 +69,16 @@ app.get("/", async (req, res) => {
       }
     });
 
+    // 🔴 NO INFO FOUND CASE
+    if (data.length === 0) {
+      return res.json({
+        success: false,
+        message: "No info found",
+        developer: DEVELOPER
+      });
+    }
+
+    // ✅ SUCCESS RESPONSE
     return res.json({
       success: true,
       count: data.length,
@@ -80,7 +89,7 @@ app.get("/", async (req, res) => {
   } catch (err) {
     return res.status(500).json({
       success: false,
-      error: "Request failed",
+      message: "No info found",
       developer: DEVELOPER
     });
   }
