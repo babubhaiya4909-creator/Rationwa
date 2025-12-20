@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5678;
 const API_KEY = "C-SINT";
 const DEVELOPER = "@C-SINTOFFICIALS";
 
-const GEMINI_API_KEY = "AIzaSyDdoeUTtvBu_MKVjJVOpvhzkFdSzg_P6K8";
+const GEMINI_API_KEY = "AIzaSyDpG1sW70KrFOgaxtPbhTkykzan4g_KDfk";
 const ENCRYPTION_KEY = "nic@impds#dedup05613";
 const USERNAME = "dsojpnagar@gmail.com";
 const PASSWORD = "CHCAEsoK";
