@@ -1,6 +1,7 @@
 {
-  "name": "rationwa-advanced",
+  "name": "clean-info-api",
   "version": "1.0.0",
+  "description": "Clean API with API key, developer tag and no-info handling",
   "main": "main.cjs",
   "type": "commonjs",
   "scripts": {
@@ -12,8 +13,6 @@
   "dependencies": {
     "express": "^4.18.2",
     "axios": "^1.6.8",
-    "cheerio": "^1.0.0-rc.12",
-    "crypto-js": "^4.2.0",
-    "@google/generative-ai": "^0.7.1"
+    "cheerio": "^1.0.0-rc.12"
   }
 }
