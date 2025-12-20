@@ -7,8 +7,8 @@ const app = express();
 const PORT = process.env.PORT || 5678;
 
 /* ========= CONFIG ========= */
-const API_KEY = "C-SINT";
-const DEVELOPER = "@CSINTOFFLICIAL";
+const API_KEY = "C-SINTMAIN";
+const DEVELOPER = "@C-SINT";
 const BASE_URL = "https://impds.nic.in/impdsdeduplication";
 /* ========================== */
 
