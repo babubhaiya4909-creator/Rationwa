@@ -1,7 +1,6 @@
 {
-  "name": "rationwa-api",
+  "name": "rationwa-advanced",
   "version": "1.0.0",
-  "description": "Ration & Aadhaar API with query API key",
   "main": "main.cjs",
   "type": "commonjs",
   "scripts": {
